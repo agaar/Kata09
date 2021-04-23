@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         Shop shop = new Shop();
-        shop.price("A");
+        shop.price("H");
 
     }
 }

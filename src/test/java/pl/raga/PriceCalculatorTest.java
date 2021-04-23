@@ -77,6 +77,16 @@ class PriceCalculatorTest {
     }
 
     @org.junit.jupiter.api.Test
+    void testNotExistingPromotion() throws Exception {
+        Exception exception = assertThrows(IllegalArgumentException.class, ()->{
+            shop.price("H");
+        });
+        String expectedMessage = "Not existing promotion code";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @org.junit.jupiter.api.Test
     void testIncremental() throws Exception {
         shop.scan("A");
         assertEquals(50.00, shop.total(), 0);

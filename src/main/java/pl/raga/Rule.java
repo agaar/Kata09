@@ -2,15 +2,14 @@ package pl.raga;
 
 public class Rule {
     private String itemName;
-    private String ruleName;
     private int quantity;
     private Double price;
 
-    public Rule(String itemName, String ruleName) {
+
+    public Rule(String itemName, int quantity, Double price) {
         this.itemName = itemName;
-        this.ruleName = ruleName;
-        this.quantity = Integer.parseInt(ruleName.split(" ")[0]);
-        this.price = Double.parseDouble(ruleName.split(" ")[2]);
+        this.quantity = quantity;
+        this.price = price;
     }
 
     public String getItemName() {

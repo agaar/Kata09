@@ -12,8 +12,8 @@ public class Shop {
 
     public Shop() {
         ruleList = new ArrayList<>();
-        ruleList.add(new Rule("A", "3 for 130"));
-        ruleList.add(new Rule("B", "2 for 45"));
+        ruleList.add(new Rule("A", 3, 130.00));
+        ruleList.add(new Rule("B", 2, 45.00));
         prices.put("A",50.00);
         prices.put("B",30.00);
         prices.put("C",20.00);
@@ -30,7 +30,7 @@ public class Shop {
 
         for(Item item: itemList){
             Double itemPrice = prices.get(item.getName());
-            if(itemPrice != null) {
+            //if(itemPrice != null) {
                 totalPrice += itemPrice * item.getQuantity();
 
                 for (Rule r : ruleList) {
@@ -41,7 +41,7 @@ public class Shop {
                         }
                     }
                 }
-            }
+            //}
         }
         return totalPrice;
     }
@@ -49,8 +49,10 @@ public class Shop {
     public void scan(String itemName) {
         if (!itemName.equals("")) {
             if (itemList.isEmpty() || !containsName(itemList, itemName)) {
-                Item item = new Item(itemName);
-                itemList.add(item);
+                if(prices.get(itemName) != null) {
+                    Item item = new Item(itemName);
+                    itemList.add(item);
+                } else throw new IllegalArgumentException("Not existing promotion code");
             } else {
                 for (Item i : itemList) {
                     if (i.getName().equals(itemName)) {
