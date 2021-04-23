@@ -24,5 +24,5 @@ public class Rule {
     public Double getPrice() {
         return price;
     }
-    
+
 }

@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Shop {
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
     private List<Rule> ruleList;
     private Map<String, Double> prices = new HashMap<>();
 
     public Shop() {
-        itemList = new ArrayList<>();
         ruleList = new ArrayList<>();
         ruleList.add(new Rule("A", "3 for 130"));
         ruleList.add(new Rule("B", "2 for 45"));
@@ -21,18 +20,25 @@ public class Shop {
         prices.put("D",15.00);
     }
 
+    public Shop(List<Rule> ruleList, Map<String, Double> prices) {
+        this.ruleList = ruleList;
+        this.prices = prices;
+    }
+
     public Double total() {
         Double totalPrice = 0.0;
 
         for(Item item: itemList){
             Double itemPrice = prices.get(item.getName());
-            totalPrice += itemPrice*item.getQuantity();
+            if(itemPrice != null) {
+                totalPrice += itemPrice * item.getQuantity();
 
-            for(Rule r : ruleList) {
-                if(r.getItemName().equals(item.getName())){
-                    if (item.getQuantity()>=r.getQuantity() ) { //discount applied
-                        Double discount = (item.getQuantity()/r.getQuantity())*(itemPrice*r.getQuantity() - r.getPrice());
-                        totalPrice -= discount;
+                for (Rule r : ruleList) {
+                    if (r.getItemName().equals(item.getName())) {
+                        if (item.getQuantity() >= r.getQuantity()) { //discount applied
+                            Double discount = (item.getQuantity() / r.getQuantity()) * (itemPrice * r.getQuantity() - r.getPrice());
+                            totalPrice -= discount;
+                        }
                     }
                 }
             }
@@ -63,8 +69,8 @@ public class Shop {
         return total();
     }
 
-
     private boolean containsName(List<Item> itemList, String itemName) {
-        return itemList.stream().filter(o -> o.getName().equals(itemName)).findFirst().isPresent();
+        //return itemList.stream().filter(o -> o.getName().equals(itemName)).findFirst().isPresent();
+        return itemList.stream().anyMatch(o -> o.getName().equals(itemName));
     }
 }
