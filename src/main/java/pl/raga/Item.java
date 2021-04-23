@@ -4,7 +4,6 @@ public class Item {
 
     private final String name;
     private int quantity;
-    //private int price;
 
     public Item(String name) {
         this.name = name;
@@ -22,8 +21,4 @@ public class Item {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-   // public int getPrice() {
-   //     return price;
-  //  }
 }

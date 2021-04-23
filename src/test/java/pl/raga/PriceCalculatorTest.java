@@ -1,10 +1,5 @@
 package pl.raga;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PriceCalculatorTest {
@@ -94,5 +89,4 @@ class PriceCalculatorTest {
         shop.scan("B");
         assertEquals(175.00, shop.total(), 0);
     }
-
 }
